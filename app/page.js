@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { books } from './data/books'
 import SiteFooter from './components/SiteFooter'
 
@@ -13,6 +13,16 @@ export default function Home() {
   const [drawer, setDrawer] = useState(false)
   const [checkoutState, setCheckoutState] = useState('idle')
   const [checkoutError, setCheckoutError] = useState('')
+
+  useEffect(() => {
+    const savedIds = JSON.parse(localStorage.getItem('cloudbound-cart') || '[]')
+    setCart(savedIds.map((id) => books.find((book) => book.id === id)).filter(Boolean))
+    if (new URLSearchParams(window.location.search).get('cart') === 'open') setDrawer(true)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('cloudbound-cart', JSON.stringify(cart.map((book) => book.id)))
+  }, [cart])
 
   const shown = useMemo(() => books.filter((book) => {
     const matchesProvider = provider === 'All' || book.provider === provider
@@ -67,7 +77,7 @@ export default function Home() {
     <section className="store-why" id="why"><p className="label">INDEPENDENT. PRACTICAL. AFFORDABLE.</p><h2>Built to turn exam objectives into confident decisions.</h2><div><p><b>Original practice</b><span>Exam-style questions built from public documentation and industry knowledge.</span></p><p><b>Useful explanations</b><span>Understand why an answer works—and why the alternatives do not.</span></p><p><b>Current coverage</b><span>Cloud, security, data, machine learning, and agentic AI certifications.</span></p></div></section>
     <footer><a className="logo" href="#top">cloudbound<span>.</span></a><p>Independent certification preparation. Unofficial and unaffiliated with certification providers.</p><div className="footer-disclaimer"><strong>Disclaimer:</strong> Google Cloud, Amazon Web Services (AWS), Microsoft Azure, NVIDIA, Cisco, Snowflake, Anthropic, and other certification providers featured here are trademarks of their respective owners and are used for identification only. These eBooks are independently published, unofficial, and unaffiliated resources and are not endorsed, sponsored, or associated with any certification provider.<br/><br/>All practice questions are original, exam-style content—not real exam questions or full mock exams—created using publicly available documentation and general industry knowledge, drafted with AI assistance, and reviewed by a human for accuracy and educational value. No proprietary, confidential, leaked, or real exam content is included. Materials are provided for educational purposes only; learners should verify all information against official exam guides and documentation.<br/><br/>Digital products are non-refundable—please review the available product information before purchasing.</div><small>© 2026 CLOUD CERTIFICATION STORE</small></footer>
 
-    {drawer && <><div className="scrim" onClick={() => setDrawer(false)}/><aside><button className="close" onClick={() => setDrawer(false)}>×</button><p className="label">YOUR CART</p><h2>Ready to prepare?</h2>{cart.length ? <><div className="cart">{cart.map((book, index) => <div key={`${book.id}-${index}`}><i>{book.code}</i><p><b>{book.title}</b><small>Digital ebook</small></p><strong>${book.price.toFixed(2)}</strong><button aria-label={`Remove ${book.title}`} onClick={() => setCart(cart.filter((_, itemIndex) => itemIndex !== index))}>×</button></div>)}</div><div className="total"><span>TOTAL</span><b>${total.toFixed(2)}</b></div><button className="checkout" disabled={checkoutState === 'loading'} onClick={checkout}>{checkoutState === 'loading' ? 'OPENING CHECKOUT…' : 'CHECKOUT SECURELY ↗'}</button>{checkoutError && <p className="checkoutError" role="alert">{checkoutError}</p>}<small className="secure">SECURE PAYMENT BY STRIPE</small></> : <p>Your cart is empty. Choose an ebook to begin.</p>}</aside></>}
+    {drawer && <><div className="scrim" onClick={() => setDrawer(false)}/><aside className="cart-drawer"><button className="close" aria-label="Close cart" onClick={() => setDrawer(false)}>×</button><p className="label">YOUR CART</p><h2>Ready to prepare?</h2>{cart.length ? <><div className="cart">{cart.map((book, index) => <div key={`${book.id}-${index}`}><i>{book.code}</i><p><b>{book.title}</b><small>Digital ebook</small></p><strong>${book.price.toFixed(2)}</strong><button aria-label={`Remove ${book.title}`} onClick={() => setCart(cart.filter((_, itemIndex) => itemIndex !== index))}>×</button></div>)}</div><div className="total"><span>TOTAL</span><b>${total.toFixed(2)}</b></div><button className="checkout" disabled={checkoutState === 'loading'} onClick={checkout}>{checkoutState === 'loading' ? 'OPENING CHECKOUT…' : 'CHECKOUT SECURELY ↗'}</button>{checkoutError && <p className="checkoutError" role="alert">{checkoutError}</p>}<small className="secure">SECURE PAYMENT BY STRIPE</small></> : <p>Your cart is empty. Choose an ebook to begin.</p>}</aside></>}
     <SiteFooter/>
   </main>
 }
