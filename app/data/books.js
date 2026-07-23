@@ -711,6 +711,27 @@ export const books = [
     "price": 9.95,
     "image": "https://payhip.com/cdn-cgi/image/format=auto,width=500/https://pe56d.s3.amazonaws.com/o_1js5kart617du1ivgin314kuoda15.png",
     "legacyUrl": "https://cloudcertificationstore.com/b/Xpj47",
+    "descriptionSections": [
+      { "type": "notice", "title": "Disclaimer", "text": "Anthropic, Claude, and Claude Certified are trademarks of Anthropic PBC. This eBook is an unofficial, unaffiliated resource." },
+      { "type": "paragraph", "text": "This eBook is designed to help you build the practical AI architecture knowledge required to pass the Claude Certified Architect Foundations (CCA-F) certification exam." },
+      { "type": "paragraph", "text": "The CCA-F certification validates your understanding of designing, building, deploying, and governing AI applications using Claude and the Anthropic platform. It focuses on modern AI solution architecture, responsible AI, prompt engineering, context management, tool use, and enterprise AI design principles." },
+      { "type": "list", "title": "What You’ll Get:", "items": [
+        "550+ Exam-Style CCA-F Practice Questions — Scenario-based questions designed to simulate real-world AI architecture and solution design decisions",
+        "Detailed Explanations for Every Answer Choice — Clear reasoning for why the correct answer is correct and why the other options are incorrect",
+        "Coverage of All Core CCA-F Domains — Organized to reinforce mastery across Claude architecture, prompt engineering, AI safety, and enterprise AI concepts",
+        "Practical AI Architecture Focus — Practice prompt design, context management, RAG, AI agents, tool use, governance, and responsible AI",
+        "Final Review Checklist and Exam Readiness Scorecard — Structured tools to assess confidence and identify knowledge gaps before scheduling your exam"
+      ] },
+      { "type": "list", "title": "Aligned to the Core CCA-F Domains:", "items": [
+        "Claude Models and AI Architecture Fundamentals",
+        "Prompt Engineering and Context Management",
+        "Building AI Applications and Agentic Workflows",
+        "Tool Integration and Retrieval-Augmented Generation (RAG)",
+        "Security, Safety, and Responsible AI"
+      ] },
+      { "type": "paragraph", "text": "This book is ideal for solution architects, AI engineers, software developers, cloud architects, technical consultants, and technology professionals looking to design enterprise-grade AI applications using Claude." },
+      { "type": "link", "text": "Read more in our blog post", "url": "https://cloudcertificationstore.com/blog/new-certification-added/cca-f-ebook" }
+    ],
     "bundle": false
   },
   {
