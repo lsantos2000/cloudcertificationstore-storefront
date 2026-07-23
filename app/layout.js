@@ -1,4 +1,5 @@
 import './styles.css'
+import './stripe.css'
 
 export const metadata = { title: 'Cloudbound — Pass the cloud exam', description: 'Practical cloud certification ebooks for AWS, Azure, and Google Cloud.' }
 
