@@ -671,8 +671,8 @@ export const books = [
     "description": "Validates professional design, training, tuning, and optimization of generative-AI LLM solutions.",
     "officialUrl": "https://www.nvidia.com/en-us/learn/certification/",
     "price": 9.95,
-    "image": "",
-    "legacyUrl": "",
+    "image": "https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jnpmrh776ho12op40olke37415.png",
+    "legacyUrl": "https://cloudcertificationstore.com/b/l4bFa",
     "bundle": false
   },
   {
@@ -685,8 +685,8 @@ export const books = [
     "description": "Validates foundational AI infrastructure and operations concepts.",
     "officialUrl": "https://www.nvidia.com/en-us/learn/certification/",
     "price": 9.95,
-    "image": "",
-    "legacyUrl": "",
+    "image": "https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jcjl44mu1lsm1dm110stld71u7v16.png",
+    "legacyUrl": "https://cloudcertificationstore.com/b/Ixa8L",
     "bundle": false
   },
   {
@@ -699,8 +699,8 @@ export const books = [
     "description": "Validates foundational generative-AI and large-language-model concepts.",
     "officialUrl": "https://www.nvidia.com/en-us/learn/certification/",
     "price": 9.95,
-    "image": "",
-    "legacyUrl": "",
+    "image": "https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jciem9jb1o9p1slo1v771vpmho317.png",
+    "legacyUrl": "https://cloudcertificationstore.com/b/5YdWD",
     "bundle": false
   },
   {
