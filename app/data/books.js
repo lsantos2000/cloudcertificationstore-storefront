@@ -545,8 +545,8 @@ export const books = [
     "description": "Validates development, deployment, testing, and troubleshooting of applications on AWS.",
     "officialUrl": "https://aws.amazon.com/certification/",
     "price": 9.95,
-    "image": "",
-    "legacyUrl": "",
+    "image": "https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jb6bcgmq1cpe1ub71bvg163ob0j17.png",
+    "legacyUrl": "https://cloudcertificationstore.com/b/whReC",
     "bundle": false
   },
   {
