@@ -81,6 +81,24 @@ export const books = [
     "price": 9.95,
     "image": "https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jb6levqk1e13n5k3bs1lk6epj19.png",
     "legacyUrl": "https://cloudcertificationstore.com/b/4SHZy",
+    "descriptionSections": [
+      { "type": "notice", "title": "Disclaimer", "text": "Microsoft Azure (Azure), Microsoft Certified, and associated marks are trademarks of Microsoft Corporation. This eBook is an unofficial, unaffiliated resource." },
+      { "type": "notice", "title": "Available formats", "text": "Our products are PDF eBooks, with options to buy a Kindle, paperback, or hardcover edition from our Amazon author store and, in some cases, receive a bonus audiobook." },
+      { "type": "paragraph", "text": "Our AZ-900-0010 practice exam questions eBook is built to help you pass faster and smarter. Inside, you’ll find:" },
+      { "type": "list", "title": "What’s included:", "items": [
+        "Over 500+ practice questions in real AZ-900 format",
+        "Detailed explanations for each correct and incorrect answer",
+        "Comprehensive Final Review Checklist and Exam Readiness Scorecard tailored specifically for your exam",
+        "Scenario-based questions on Azure subscriptions, RBAC, and hybrid cloud",
+        "Cost calculator examples and pricing scenarios",
+        "Security and governance concept drills, including Azure Firewall and NSGs",
+        "Use it on the go—on your laptop, tablet, phone, or any device that can read PDF files"
+      ] },
+      { "type": "paragraph", "text": "We wrote this guide to simulate the actual exam—no fluff, just clean, focused practice." },
+      { "type": "paragraph", "text": "You don’t need prior cloud experience—just a willingness to learn." },
+      { "type": "paragraph", "text": "Review the free preview before purchasing to make sure the guide is right for you." },
+      { "type": "link", "text": "Find more details about this certification in our blog", "url": "https://payhip.com/CloudCertificationStore/blog/news/microsoft-certified-azure-fundamentals-az-900-certification" }
+    ],
     "bundle": false
   },
   {

@@ -1,8 +1,12 @@
 import { notFound } from 'next/navigation'
 import { books, getBook } from '../../data/books'
+import { storeDescriptions } from '../../data/store-descriptions'
 import BuyButton from './BuyButton'
 
 function BookDescription({ book }) {
+  if (!book.descriptionSections && storeDescriptions[book.id]) {
+    return <div className="book-description rich-description" dangerouslySetInnerHTML={{ __html: storeDescriptions[book.id] }}/>
+  }
   if (!book.descriptionSections) {
     return book.description.split(/(?=✅|🔹|🎯|🧠)|(?<=[.!?])\s+(?=[A-Z])/).filter(Boolean).map((paragraph, index) => <p key={index}>{paragraph}</p>)
   }
@@ -37,6 +41,6 @@ export default async function BookPage({ params }) {
     </section>
     <section className="detail-body"><article><p className="label">ABOUT THIS EBOOK</p><h2>Prepare for {book.certification}.</h2><BookDescription book={book}/></article><aside><p className="label">CERTIFICATION</p><h3>{book.certification}</h3><p>{book.tileDescription}</p>{book.officialUrl && <a href={book.officialUrl} target="_blank" rel="noreferrer">VIEW OFFICIAL CERTIFICATION ↗</a>}</aside></section>
     <section className="detail-note"><b>Independent preparation material</b><p>This is an unofficial, unaffiliated educational resource. Certification provider names and marks are used for identification only.</p></section>
-    <footer><a className="logo" href="/">cloudbound<span>.</span></a><p>Original exam-style practice for cloud and AI certifications.</p><small>© 2026 CLOUD CERTIFICATION STORE</small></footer>
+    <footer><a className="logo" href="/">cloudbound<span>.</span></a><p>Original exam-style practice for cloud and AI certifications.</p><div className="footer-disclaimer"><strong>Disclaimer:</strong> Google Cloud, Amazon Web Services (AWS), Microsoft Azure, NVIDIA, Cisco, Snowflake, Anthropic, and other certification providers featured here are trademarks of their respective owners and are used for identification only. These eBooks are independently published, unofficial, and unaffiliated resources and are not endorsed, sponsored, or associated with any certification provider.<br/><br/>All practice questions are original, exam-style content—not real exam questions or full mock exams—created using publicly available documentation and general industry knowledge, drafted with AI assistance, and reviewed by a human for accuracy and educational value. No proprietary, confidential, leaked, or real exam content is included. Materials are provided for educational purposes only; learners should verify all information against official exam guides and documentation.<br/><br/>Digital products are non-refundable—please review the available product information before purchasing.</div><small>© 2026 CLOUD CERTIFICATION STORE</small></footer>
   </main>
 }
