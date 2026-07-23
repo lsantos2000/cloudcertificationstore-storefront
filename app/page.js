@@ -1,32 +1,71 @@
 'use client'
+
 import { useMemo, useState } from 'react'
+import { books } from './data/books'
 
-const guides=[
-  {provider:'AWS',code:'SAA-C03',title:'Solutions Architect',level:'Associate',pages:286,price:29,color:'#ffb84d'},
-  {provider:'AZURE',code:'AZ-104',title:'Azure Administrator',level:'Associate',pages:252,price:27,color:'#58a6ff'},
-  {provider:'GCP',code:'PCA',title:'Cloud Architect',level:'Professional',pages:318,price:32,color:'#60e8ad'},
-  {provider:'AWS',code:'SCS-C02',title:'Security Specialty',level:'Specialty',pages:234,price:31,color:'#ffb84d'},
-  {provider:'AZURE',code:'AZ-900',title:'Azure Fundamentals',level:'Foundational',pages:148,price:19,color:'#58a6ff'},
-  {provider:'GCP',code:'ACE',title:'Associate Cloud Engineer',level:'Associate',pages:221,price:25,color:'#60e8ad'}
-]
-const bundleGuide={provider:'MULTI-CLOUD',code:'MULTI-CLOUD',title:'Multi-Cloud Bundle',level:'Bundle',pages:0,price:59,color:'#d9ff45'}
+const providers = ['All', 'Bundles', 'Microsoft', 'Google Cloud', 'AWS', 'NVIDIA', 'Anthropic', 'Cisco', 'Snowflake']
 
-function Cover({g,big=false}){return <div className={'cover '+(big?'big':'')} style={{'--accent':g.color}}><div className="coverTop"><b>cloudbound<span>.</span></b><small>2026 EDITION</small></div><div className="cloud">☁</div><small>{g.provider} CERTIFICATION</small><strong>{g.title}</strong><code>{g.code} · STUDY GUIDE</code></div>}
+export default function Home() {
+  const [provider, setProvider] = useState('All')
+  const [query, setQuery] = useState('')
+  const [cart, setCart] = useState([])
+  const [drawer, setDrawer] = useState(false)
+  const [checkoutState, setCheckoutState] = useState('idle')
+  const [checkoutError, setCheckoutError] = useState('')
 
-export default function Home(){
- const [filter,setFilter]=useState('ALL');const [cart,setCart]=useState([]);const [drawer,setDrawer]=useState(false);const [checkoutState,setCheckoutState]=useState('idle');const [checkoutError,setCheckoutError]=useState('');const shown=useMemo(()=>filter==='ALL'?guides:guides.filter(g=>g.provider===filter),[filter]);const total=cart.reduce((n,g)=>n+g.price,0)
- async function checkout(){setCheckoutState('loading');setCheckoutError('');try{const response=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:cart.map(g=>g.code)})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Checkout could not be started.');window.location.assign(data.url)}catch(error){setCheckoutState('idle');setCheckoutError(error.message)}}
- return <main>
-  <div className="topbar"><span>✦ FREE 2026 EXAM UPDATES</span><span>INSTANT PDF + EPUB DOWNLOAD</span><span>7-DAY PASS GUARANTEE</span></div>
-  <nav><a className="logo">cloudbound<span>.</span></a><div><a href="#guides">GUIDES</a><a href="#bundle">BUNDLES</a><a href="#method">OUR METHOD</a></div><button onClick={()=>setDrawer(true)}>YOUR STACK <b>{cart.length}</b></button></nav>
-  <section className="hero"><div className="heroCopy"><p className="label">— BUILT FOR THE EXAM. USEFUL AFTER IT.</p><h1>Learn the cloud.<br/><em>Own the exam.</em></h1><p className="lede">Practical, visual study guides for cloud engineers who want understanding—not another 40-hour video playlist.</p><div className="actions"><a href="#guides">EXPLORE THE GUIDES ↗</a><a href="#method">SEE HOW WE TEACH →</a></div><div className="rating"><span>JN</span><span>AK</span><span>ML</span><p><b>4.9 / 5</b><small>FROM 2,400+ CLOUD LEARNERS</small></p></div></div><div className="heroArt"><div className="ring r1"/><div className="ring r2"/><Cover g={guides[0]} big/><div className="pass"><small>PASS RATE</small><b>92%</b><small>OF SURVEYED READERS</small></div></div></section>
-  <div className="marquee">NO FLUFF　✦　REAL ARCHITECTURE　✦　EXAM-ALIGNED　✦　LIFETIME UPDATES　✦　NO FLUFF</div>
-  <section className="catalog" id="guides"><header><div><p className="label">// THE LIBRARY</p><h2>Pick your next<br/>certification.</h2></div><p>Each guide turns an overwhelming exam blueprint into a focused, memorable path—with diagrams, drills, and decision frameworks.</p></header><div className="filters">{['ALL','AWS','AZURE','GCP'].map(f=><button className={filter===f?'active':''} onClick={()=>setFilter(f)} key={f}>{f==='ALL'?'ALL GUIDES':f}</button>)}</div><div className="grid">{shown.map((g,i)=><article key={g.code}><span className="num">0{i+1}</span><Cover g={g}/><p className="provider" style={{color:g.color}}>{g.provider} · {g.level.toUpperCase()}</p><h3>{g.title}</h3><p className="desc">Clear architecture maps, decision tables, exam traps, and scenario drills for confident test-day choices.</p><div className="spec"><span>{g.pages} PAGES</span><span>PDF + EPUB</span><span>2026</span></div><div className="buy"><strong>${g.price}</strong><button onClick={()=>setCart([...cart,g])}>ADD TO STACK ＋</button></div></article>)}</div></section>
-  <section className="bundle" id="bundle"><div><p className="label">// THE MULTI-CLOUD BUNDLE</p><h2>Three clouds.<br/>One serious edge.</h2><p>Our flagship associate guides for AWS, Azure, and Google Cloud—plus a cross-cloud services map.</p><ul><li>AWS SAA-C03 complete guide</li><li>Azure AZ-104 complete guide</li><li>Google Cloud ACE complete guide</li><li>Cross-cloud services cheat sheet</li></ul><div className="bundleBuy"><strong><del>$81</del> $59</strong><button onClick={()=>{setCart([bundleGuide]);setDrawer(true)}}>GET THE BUNDLE ↗</button></div></div><div className="stack"><div><Cover g={guides[0]}/></div><div><Cover g={guides[1]}/></div><div><Cover g={guides[5]}/></div></div></section>
-  <section className="method" id="method"><p className="label">// WHY CLOUDBOUND</p><h2>Designed for how<br/>technical minds learn.</h2><div>{[['01','SEE THE SYSTEM','Architecture maps connect services before details bury the story.'],['02','MAKE THE CALL','Decision tables teach when to choose a service—not just what it does.'],['03','TEST THE MODEL','Scenario drills explain why every wrong answer is wrong.']].map(x=><article key={x[0]}><span>{x[0]}</span><h3>{x[1]}</h3><p>{x[2]}</p></article>)}</div></section>
-  <section className="quote"><blockquote>“I stopped memorizing service names and started seeing the architecture. Passed SAA-C03 with 812.”</blockquote><p><b>RINA S.</b><small>PLATFORM ENGINEER · TORONTO</small></p></section>
-  <section className="cta"><p className="label">YOUR NEXT ROLE IS WAITING</p><h2>Study smarter.<br/><em>Ship sooner.</em></h2><a href="#guides">FIND YOUR GUIDE ↗</a></section>
-  <footer><a className="logo">cloudbound<span>.</span></a><p>FIELD GUIDES FOR THE CLOUD-CURIOUS.</p><small>© 2026 CLOUDBOUND PRESS</small></footer>
-  {drawer&&<><div className="scrim" onClick={()=>setDrawer(false)}/><aside><button className="close" onClick={()=>setDrawer(false)}>×</button><p className="label">// YOUR STACK</p><h2>Ready to level up?</h2>{cart.length?<> <div className="cart">{cart.map((g,i)=><div key={i}><i style={{background:g.color}}>{g.code}</i><p><b>{g.title}</b><small>PDF + EPUB</small></p><strong>${g.price}</strong><button aria-label={`Remove ${g.title}`} onClick={()=>setCart(cart.filter((_,j)=>j!==i))}>×</button></div>)}</div><div className="total"><span>TOTAL</span><b>${total}</b></div><button className="checkout" disabled={checkoutState==='loading'} onClick={checkout}>{checkoutState==='loading'?'OPENING STRIPE…':'CHECKOUT SECURELY ↗'}</button>{checkoutError&&<p className="checkoutError" role="alert">{checkoutError}</p>}<small className="secure">SECURE PAYMENT BY STRIPE · INSTANT DOWNLOAD</small></>:<p>Your stack is empty. Pick a guide and start building.</p>}</aside></>}
- </main>
+  const shown = useMemo(() => books.filter((book) => {
+    const matchesProvider = provider === 'All' || book.provider === provider
+    const haystack = `${book.title} ${book.certification} ${book.code}`.toLowerCase()
+    return matchesProvider && haystack.includes(query.trim().toLowerCase())
+  }), [provider, query])
+
+  const total = cart.reduce((sum, book) => sum + book.price, 0)
+
+  function add(book) {
+    setCart((current) => [...current, book])
+    setDrawer(true)
+  }
+
+  async function checkout() {
+    setCheckoutState('loading')
+    setCheckoutError('')
+    try {
+      const response = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: cart.map((book) => book.id) }) })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || 'Checkout could not be started.')
+      window.location.assign(data.url)
+    } catch (error) {
+      setCheckoutState('idle')
+      setCheckoutError(error.message)
+    }
+  }
+
+  return <main className="store-shell">
+    <div className="topbar"><span>53 CURRENT CLOUD & AI TITLES</span><span>INSTANT DIGITAL DELIVERY</span><span>SECURE CHECKOUT</span></div>
+    <nav><a className="logo" href="#top">cloudbound<span>.</span></a><div><a href="#catalog">EBOOKS</a><a href="#catalog">BUNDLES</a><a href="#why">WHY US</a></div><button onClick={() => setDrawer(true)}>YOUR CART <b>{cart.length}</b></button></nav>
+
+    <section className="store-hero" id="top">
+      <div><p className="label">CLOUD CERTIFICATION PRACTICE LIBRARY</p><h1>Prepare with purpose.<br/><em>Pass with confidence.</em></h1><p>Original, exam-style practice questions with clear explanations for AWS, Microsoft, Google Cloud, NVIDIA, Cisco, Snowflake, and Anthropic certifications.</p><a className="store-primary" href="#catalog">BROWSE ALL EBOOKS ↗</a></div>
+      <div className="store-hero-stat"><strong>53</strong><span>ACTIVE EBOOKS<br/>AND BUNDLES</span><small>Grounded in the July 2026 catalog</small></div>
+    </section>
+
+    <section className="store-catalog" id="catalog">
+      <header><div><p className="label">THE COMPLETE COLLECTION</p><h2>Find your next certification.</h2></div><label className="store-search"><span>SEARCH</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Exam, provider, or code"/></label></header>
+      <div className="store-filters" aria-label="Filter ebooks by provider">{providers.map((item) => <button key={item} className={provider === item ? 'active' : ''} onClick={() => setProvider(item)}>{item}</button>)}</div>
+      <p className="store-results">{shown.length} {shown.length === 1 ? 'TITLE' : 'TITLES'}</p>
+      <div className="store-grid">{shown.map((book) => <article className="store-card" key={book.id}>
+        <a className="store-cover" href={`/books/${book.id}`} aria-label={`View ${book.title}`}>{book.image ? <img src={book.image} alt={`${book.title} cover`}/> : <div><b>{book.provider}</b><strong>{book.code}</strong><span>Practice Exam Questions</span></div>}</a>
+        <p className="store-provider">{book.provider} · {book.code}</p>
+        <h3><a href={`/books/${book.id}`}>{book.title}</a></h3>
+        <p className="store-desc">{book.tileDescription}</p>
+        {book.officialUrl && <a className="store-official" href={book.officialUrl} target="_blank" rel="noreferrer">Official certification ↗</a>}
+        <div className="store-buy"><strong>${book.price.toFixed(2)}</strong><button onClick={() => add(book)}>ADD TO CART ＋</button></div>
+      </article>)}</div>
+    </section>
+
+    <section className="store-why" id="why"><p className="label">INDEPENDENT. PRACTICAL. AFFORDABLE.</p><h2>Built to turn exam objectives into confident decisions.</h2><div><p><b>Original practice</b><span>Exam-style questions built from public documentation and industry knowledge.</span></p><p><b>Useful explanations</b><span>Understand why an answer works—and why the alternatives do not.</span></p><p><b>Current coverage</b><span>Cloud, security, data, machine learning, and agentic AI certifications.</span></p></div></section>
+    <footer><a className="logo" href="#top">cloudbound<span>.</span></a><p>Independent certification preparation. Unofficial and unaffiliated with certification providers.</p><small>© 2026 CLOUD CERTIFICATION STORE</small></footer>
+
+    {drawer && <><div className="scrim" onClick={() => setDrawer(false)}/><aside><button className="close" onClick={() => setDrawer(false)}>×</button><p className="label">YOUR CART</p><h2>Ready to prepare?</h2>{cart.length ? <><div className="cart">{cart.map((book, index) => <div key={`${book.id}-${index}`}><i>{book.code}</i><p><b>{book.title}</b><small>Digital ebook</small></p><strong>${book.price.toFixed(2)}</strong><button aria-label={`Remove ${book.title}`} onClick={() => setCart(cart.filter((_, itemIndex) => itemIndex !== index))}>×</button></div>)}</div><div className="total"><span>TOTAL</span><b>${total.toFixed(2)}</b></div><button className="checkout" disabled={checkoutState === 'loading'} onClick={checkout}>{checkoutState === 'loading' ? 'OPENING CHECKOUT…' : 'CHECKOUT SECURELY ↗'}</button>{checkoutError && <p className="checkoutError" role="alert">{checkoutError}</p>}<small className="secure">SECURE PAYMENT BY STRIPE</small></> : <p>Your cart is empty. Choose an ebook to begin.</p>}</aside></>}
+  </main>
 }

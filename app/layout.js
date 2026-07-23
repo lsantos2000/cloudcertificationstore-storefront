@@ -1,7 +1,7 @@
 import './styles.css'
 import './stripe.css'
 
-export const metadata = { title: 'Cloudbound — Pass the cloud exam', description: 'Practical cloud certification ebooks for AWS, Azure, and Google Cloud.' }
+export const metadata = { title: 'Cloudbound — Cloud Certification Practice eBooks', description: 'Original practice exam question ebooks for AWS, Microsoft, Google Cloud, NVIDIA, Cisco, Snowflake, and Anthropic certifications.' }
 
 export default function RootLayout({ children }) {
   return <html lang="en"><body>{children}</body></html>
