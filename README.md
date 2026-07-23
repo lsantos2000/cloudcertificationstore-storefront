@@ -2,6 +2,10 @@
 
 Cloudbound is a responsive storefront for selling cloud-certification ebooks covering AWS, Microsoft Azure, and Google Cloud. It includes catalog filtering, a client-side cart, bundle pricing, and a server-side Stripe Checkout integration.
 
+## Sample deployment
+
+A sample deployment can be found at [https://cloudbound-guides.lsantos2000.workers.dev/](https://cloudbound-guides.lsantos2000.workers.dev/).
+
 ## Features
 
 - Responsive certification-guide catalog
