@@ -38,7 +38,7 @@ export const books = [
     "officialUrl": "",
     "price": 19.95,
     "image": "https://payhip.com/cdn-cgi/image/format=auto,width=500/https://pe56d.s3.amazonaws.com/o_1jbagu0tk64v3b61djcap01tcq15.png",
-    "legacyUrl": "https://cloudcertificationstore.com/b/HMkOl",
+    "legacyUrl": "https://cloudcertificationstore.com/b/DOK80",
     "bundle": true
   },
   {
@@ -52,7 +52,7 @@ export const books = [
     "officialUrl": "",
     "price": 19.95,
     "image": "https://payhip.com/cdn-cgi/image/format=auto,width=500/https://pe56d.s3.amazonaws.com/o_1jbaivbgp15s3siv1pl41rjo12047.png",
-    "legacyUrl": "https://cloudcertificationstore.com/b/DOK80",
+    "legacyUrl": "https://cloudcertificationstore.com/b/apkZU",
     "bundle": true
   },
   {

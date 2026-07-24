@@ -1,13 +1,15 @@
 import { notFound } from 'next/navigation'
 import { books, getBook } from '../../data/books'
 import { storeDescriptions } from '../../data/store-descriptions'
+import { bundleDescriptions } from '../../data/bundle-descriptions'
 import BuyButton from './BuyButton'
 import CertificationPanel from './CertificationPanel'
 import SiteFooter from '../../components/SiteFooter'
 
 function BookDescription({ book }) {
-  if (!book.descriptionSections && storeDescriptions[book.id]) {
-    return <div className="book-description rich-description" dangerouslySetInnerHTML={{ __html: storeDescriptions[book.id] }}/>
+  const richDescription = bundleDescriptions[book.id] || storeDescriptions[book.id]
+  if (!book.descriptionSections && richDescription) {
+    return <div className="book-description rich-description" dangerouslySetInnerHTML={{ __html: richDescription }}/>
   }
   if (!book.descriptionSections) {
     return book.description.split(/(?=✅|🔹|🎯|🧠)|(?<=[.!?])\s+(?=[A-Z])/).filter(Boolean).map((paragraph, index) => <p key={index}>{paragraph}</p>)
