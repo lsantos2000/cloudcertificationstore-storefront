@@ -356,7 +356,7 @@ export const books = [
   {
     "id": "google-cloud-practice-exam-questions-for-the-google-cloud-associate-cloud-engineer-ace",
     "provider": "Google Cloud",
-    "code": "BUNDLE",
+    "code": "ACE",
     "title": "Practice Exam Questions for the Google Cloud Associate Cloud Engineer (ACE)",
     "certification": "Google Cloud Certified Associate Cloud Engineer - ACE",
     "tileDescription": "Validates deployment, operation, and security of Google Cloud solutions.",
@@ -420,7 +420,7 @@ export const books = [
     "officialUrl": "https://cloud.google.com/learn/certification",
     "price": 9.95,
     "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jb5p202oodu1leilfh1tk81t9a17.png",
-    "legacyUrl": "https://cloudcertificationstore.com/b/HaeRy",
+    "legacyUrl": "https://cloudcertificationstore.com/b/Y1OyW",
     "bundle": false
   },
   {
@@ -755,7 +755,7 @@ export const books = [
   {
     "id": "cisco-practice-exam-questions-for-the-cisco-certified-network-associate-ccna-200-301-v",
     "provider": "Cisco",
-    "code": "BUNDLE",
+    "code": "CCNA 200-301",
     "title": "Practice Exam Questions for the Cisco Certified Network Associate (CCNA 200-301 v1.1)",
     "certification": "Cisco Certified Network Associate - CCNA 200-301 v1.1",
     "tileDescription": "Validates networking fundamentals, IP connectivity, security fundamentals, automation, and programmability.",

@@ -2,12 +2,13 @@ import { notFound } from 'next/navigation'
 import { books, getBook } from '../../data/books'
 import { storeDescriptions } from '../../data/store-descriptions'
 import { bundleDescriptions } from '../../data/bundle-descriptions'
+import { descriptionCorrections } from '../../data/description-corrections'
 import BuyButton from './BuyButton'
 import CertificationPanel from './CertificationPanel'
 import SiteFooter from '../../components/SiteFooter'
 
 function BookDescription({ book }) {
-  const richDescription = bundleDescriptions[book.id] || storeDescriptions[book.id]
+  const richDescription = descriptionCorrections[book.id] || bundleDescriptions[book.id] || storeDescriptions[book.id]
   if (!book.descriptionSections && richDescription) {
     return <div className="book-description rich-description" dangerouslySetInnerHTML={{ __html: richDescription }}/>
   }
