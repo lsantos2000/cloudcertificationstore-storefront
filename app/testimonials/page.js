@@ -7,7 +7,7 @@ const testimonials = [
 ]
 
 export default function TestimonialsPage() {
-  return <ContentPage eyebrow="LEARNER STORIES" title="Built for the moment preparation turns into confidence." intro="Feedback from professionals using our independent practice resources.">
+  return <ContentPage eyebrow="LEARNER STORIES" title="Built for the moment preparation turns into confidence." intro="Feedback from professionals using our independent practice resources." image="/site-images/cloud-engineer.png" imageAlt="Cloud engineer preparing for certification">
     <div className="testimonial-grid">{testimonials.map(([title, quote, by]) => <blockquote key={title}><h3>{title}</h3><p>“{quote}”</p><cite>{by}</cite></blockquote>)}</div>
     <p className="content-note">Testimonials describe individual experiences and do not guarantee certification results.</p>
   </ContentPage>

@@ -10,7 +10,7 @@ const resources = [
 ]
 
 export default function FreeResourcesPage() {
-  return <ContentPage eyebrow="FREE RESOURCES" title="Start with the official exam objectives." intro="Use authoritative provider materials to understand the certification, confirm current objectives, and plan your preparation.">
+  return <ContentPage eyebrow="FREE RESOURCES" title="Start with the official exam objectives." intro="Use authoritative provider materials to understand the certification, confirm current objectives, and plan your preparation." image="/site-images/google-certification.png" imageAlt="Professional studying for a cloud certification">
     <div className="resource-grid">{resources.map(([title, text, href]) => <a key={title} href={href} target="_blank" rel="noreferrer"><h3>{title}</h3><p>{text}</p><strong>OPEN OFFICIAL RESOURCE ↗</strong></a>)}</div>
     <div className="content-callout"><strong>Study responsibly</strong><p>Certification objectives change. Always compare third-party preparation material with the latest official exam guide and documentation.</p></div>
   </ContentPage>

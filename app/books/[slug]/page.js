@@ -36,7 +36,7 @@ export default async function BookPage({ params }) {
   const book = getBook(slug)
   if (!book) notFound()
   return <main className="detail-shell">
-    <nav><a className="logo" href="/">cloudbound<span>.</span></a><div><a href="/#catalog">ALL EBOOKS</a><a href="/#why">WHY US</a></div><a className="detail-back" href="/#catalog">← BACK TO CATALOG</a></nav>
+    <nav><a className="logo" href="/">CloudBound Guides</a><div><a href="/#catalog">ALL EBOOKS</a><a href="/#why">WHY US</a></div><a className="detail-back" href="/#catalog">← BACK TO CATALOG</a></nav>
     <section className="detail-hero">
       <div className="detail-cover">{book.image ? <img src={book.image} alt={`${book.title} cover`}/> : <div><b>{book.provider}</b><strong>{book.code}</strong><span>Practice Exam Questions</span></div>}</div>
       <div className="detail-copy"><p className="store-provider">{book.provider} · {book.code}</p><h1>{book.title}</h1><p className="detail-intro">{book.tileDescription}</p><div className="detail-price"><strong>${book.price.toFixed(2)}</strong><span>Digital ebook · Instant delivery</span></div><BuyButton bookId={book.id}/><small>Secure payment processed by Stripe.</small></div>
