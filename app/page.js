@@ -15,13 +15,13 @@ export default function Home() {
   const [checkoutError, setCheckoutError] = useState('')
 
   useEffect(() => {
-    const savedIds = JSON.parse(localStorage.getItem('cloudbound-cart') || '[]')
+    const savedIds = JSON.parse(localStorage.getItem('ccs-cart') || localStorage.getItem('cloudbound-cart') || '[]')
     setCart(savedIds.map((id) => books.find((book) => book.id === id)).filter(Boolean))
     if (new URLSearchParams(window.location.search).get('cart') === 'open') setDrawer(true)
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('cloudbound-cart', JSON.stringify(cart.map((book) => book.id)))
+    localStorage.setItem('ccs-cart', JSON.stringify(cart.map((book) => book.id)))
   }, [cart])
 
   const shown = useMemo(() => books.filter((book) => {
@@ -48,18 +48,17 @@ export default function Home() {
       window.location.assign(data.url)
     } catch (error) {
       setCheckoutState('idle')
-      setCheckoutError('Educational Site — Buy the actual books at CloudCertificationStore.com')
+      setCheckoutError(error.message || 'Checkout could not be started.')
     }
   }
 
   return <main className="store-shell">
-    <div className="demo-banner">DEMO EDUCATIONAL SITE — BUY THE ACTUAL EBOOKS AT <a href="https://CloudCertificationStore.com" target="_blank" rel="noreferrer">CLOUDCERTIFICATIONSTORE.COM ↗</a></div>
-    <div className="topbar"><span>53 CURRENT CLOUD & AI TITLES</span><span>INSTANT DIGITAL DELIVERY</span><span>SECURE CHECKOUT</span></div>
-    <nav><a className="logo" href="#top">CloudBound Guides</a><div><a href="#catalog">EBOOKS</a><a href="#catalog">BUNDLES</a><a href="#why">WHY US</a></div><button onClick={() => setDrawer(true)}>YOUR CART <b>{cart.length}</b></button></nav>
+    <div className="topbar"><span>{books.length} CURRENT CLOUD & AI TITLES</span><span>INSTANT DIGITAL DELIVERY</span><span>SECURE CHECKOUT</span></div>
+    <nav><a className="logo" href="#top">CloudCertification<span>Store</span></a><div><a href="#catalog">EBOOKS</a><a href="#catalog">BUNDLES</a><a href="#why">WHY US</a></div><button onClick={() => setDrawer(true)}>YOUR CART <b>{cart.length}</b></button></nav>
 
     <section className="store-hero" id="top">
-      <div><p className="label">CLOUD CERTIFICATION PRACTICE LIBRARY</p><h1>Prepare with purpose.<br/><em>Pass with confidence.</em></h1><p>Original, exam-style practice questions with clear explanations for AWS, Microsoft, Google Cloud, NVIDIA, Cisco, Snowflake, and Anthropic certifications.</p><a className="store-primary" href="#catalog">BROWSE ALL EBOOKS ↗</a></div>
-      <figure className="store-hero-image"><img src="/site-images/librarian-guide.png" alt="Cloud certification guide librarian holding an ebook"/><figcaption>Practical guides for focused certification preparation.</figcaption></figure>
+      <div><p className="label">GET IT DONE CERTIFIED</p><h1>Practice exams.<br/><em>Pass with confidence.</em></h1><p>Original, exam-style practice questions with clear explanations for AWS, Microsoft Azure, Google Cloud, NVIDIA, Cisco, Snowflake, and Anthropic certifications.</p><a className="store-primary" href="#catalog">BROWSE ALL EBOOKS ↗</a></div>
+      <figure className="store-hero-image"><img src="/site-images/certification-team.png" alt="Cloud certification professionals studying with Get It Done Certified eBooks"/><figcaption>Independent preparation guides trusted by cloud professionals worldwide.</figcaption></figure>
     </section>
 
     <section className="store-catalog" id="catalog">
@@ -77,9 +76,9 @@ export default function Home() {
     </section>
 
     <section className="store-why" id="why"><p className="label">INDEPENDENT. PRACTICAL. AFFORDABLE.</p><h2>Built to turn exam objectives into confident decisions.</h2><div><p><b>Original practice</b><span>Exam-style questions built from public documentation and industry knowledge.</span></p><p><b>Useful explanations</b><span>Understand why an answer works—and why the alternatives do not.</span></p><p><b>Current coverage</b><span>Cloud, security, data, machine learning, and agentic AI certifications.</span></p></div></section>
-    <footer><a className="logo" href="#top">cloudbound<span>.</span></a><p>Independent certification preparation. Unofficial and unaffiliated with certification providers.</p><div className="footer-disclaimer"><strong>Disclaimer:</strong> Google Cloud, Amazon Web Services (AWS), Microsoft Azure, NVIDIA, Cisco, Snowflake, Anthropic, and other certification providers featured here are trademarks of their respective owners and are used for identification only. These eBooks are independently published, unofficial, and unaffiliated resources and are not endorsed, sponsored, or associated with any certification provider.<br/><br/>All practice questions are original, exam-style content—not real exam questions or full mock exams—created using publicly available documentation and general industry knowledge, drafted with AI assistance, and reviewed by a human for accuracy and educational value. No proprietary, confidential, leaked, or real exam content is included. Materials are provided for educational purposes only; learners should verify all information against official exam guides and documentation.<br/><br/>Digital products are non-refundable—please review the available product information before purchasing.</div><small>© 2026 CLOUD CERTIFICATION STORE</small></footer>
+    <footer><a className="logo" href="#top">CloudCertification<span>Store</span></a><p>Independent certification preparation. Unofficial and unaffiliated with certification providers.</p><div className="footer-disclaimer"><strong>Disclaimer:</strong> Google Cloud, Amazon Web Services (AWS), Microsoft Azure, NVIDIA, Cisco, Snowflake, Anthropic, and other certification providers featured here are trademarks of their respective owners and are used for identification only. These eBooks are independently published, unofficial, and unaffiliated resources and are not endorsed, sponsored, or associated with any certification provider.<br/><br/>All practice questions are original, exam-style content—not real exam questions or full mock exams—created using publicly available documentation and general industry knowledge, drafted with AI assistance, and reviewed by a human for accuracy and educational value. No proprietary, confidential, leaked, or real exam content is included. Materials are provided for educational purposes only; learners should verify all information against official exam guides and documentation.<br/><br/>Digital products are non-refundable—please review the available product information before purchasing.</div><small>© 2026 CLOUD CERTIFICATION STORE</small></footer>
 
-    {drawer && <><div className="scrim" onClick={() => setDrawer(false)}/><aside className="cart-drawer"><button className="close" aria-label="Close cart" onClick={() => setDrawer(false)}>×</button><p className="label">YOUR CART</p><h2>Ready to prepare?</h2>{cart.length ? <><button className="checkout cart-checkout-top" disabled={checkoutState === 'loading'} onClick={checkout}>{checkoutState === 'loading' ? 'OPENING CHECKOUT…' : `CHECKOUT ${cart.length} ${cart.length === 1 ? 'EBOOK' : 'EBOOKS'} · $${total.toFixed(2)} ↗`}</button><div className="cart-scroll"><div className="cart">{cart.map((book) => <div key={book.id}><i>{book.code}</i><p><b>{book.title}</b><small>Digital ebook</small></p><strong>${book.price.toFixed(2)}</strong><button aria-label={`Remove ${book.title}`} onClick={() => setCart(cart.filter((item) => item.id !== book.id))}>×</button></div>)}</div><div className="total"><span>TOTAL</span><b>${total.toFixed(2)}</b></div><button className="checkout" disabled={checkoutState === 'loading'} onClick={checkout}>{checkoutState === 'loading' ? 'OPENING CHECKOUT…' : 'CHECKOUT SECURELY ↗'}</button>{checkoutError && <p className="checkoutError" role="alert">Educational Site — Buy the actual books at <a href="http://cloudcertificationstore.com" target="_blank" rel="noreferrer">CloudCertificationStore.com ↗</a></p>}<small className="secure">SECURE PAYMENT BY STRIPE</small></div></> : <p>Your cart is empty. Choose an ebook to begin.</p>}</aside></>}
+    {drawer && <><div className="scrim" onClick={() => setDrawer(false)}/><aside className="cart-drawer"><button className="close" aria-label="Close cart" onClick={() => setDrawer(false)}>×</button><p className="label">YOUR CART</p><h2>Ready to prepare?</h2>{cart.length ? <><button className="checkout cart-checkout-top" disabled={checkoutState === 'loading'} onClick={checkout}>{checkoutState === 'loading' ? 'OPENING CHECKOUT…' : `CHECKOUT ${cart.length} ${cart.length === 1 ? 'EBOOK' : 'EBOOKS'} · $${total.toFixed(2)} ↗`}</button><div className="cart-scroll"><div className="cart">{cart.map((book) => <div key={book.id}><i>{book.code}</i><p><b>{book.title}</b><small>Digital ebook</small></p><strong>${book.price.toFixed(2)}</strong><button aria-label={`Remove ${book.title}`} onClick={() => setCart(cart.filter((item) => item.id !== book.id))}>×</button></div>)}</div><div className="total"><span>TOTAL</span><b>${total.toFixed(2)}</b></div><button className="checkout" disabled={checkoutState === 'loading'} onClick={checkout}>{checkoutState === 'loading' ? 'OPENING CHECKOUT…' : 'CHECKOUT SECURELY ↗'}</button>{checkoutError && <p className="checkoutError" role="alert">{checkoutError}</p>}<small className="secure">SECURE PAYMENT BY STRIPE</small></div></> : <p>Your cart is empty. Choose an ebook to begin.</p>}</aside></>}
     <SiteFooter/>
   </main>
 }

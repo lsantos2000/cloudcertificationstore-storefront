@@ -6,14 +6,14 @@ export default function BuyButton({ bookId }) {
   const [added, setAdded] = useState(false)
 
   useEffect(() => {
-    const current = JSON.parse(localStorage.getItem('cloudbound-cart') || '[]')
+    const current = JSON.parse(localStorage.getItem('ccs-cart') || localStorage.getItem('cloudbound-cart') || '[]')
     setAdded(current.includes(bookId))
   }, [bookId])
 
   function addToCart() {
-    const current = JSON.parse(localStorage.getItem('cloudbound-cart') || '[]')
+    const current = JSON.parse(localStorage.getItem('ccs-cart') || localStorage.getItem('cloudbound-cart') || '[]')
     if (current.includes(bookId)) return
-    localStorage.setItem('cloudbound-cart', JSON.stringify([...current, bookId]))
+    localStorage.setItem('ccs-cart', JSON.stringify([...current, bookId]))
     setAdded(true)
   }
 

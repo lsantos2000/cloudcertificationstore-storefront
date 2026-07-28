@@ -1,6 +1,6 @@
-# Cloudbound Guides
+# Cloud Certification Store
 
-Cloudbound is a responsive storefront for selling cloud-certification ebooks covering AWS, Microsoft Azure, and Google Cloud. It includes catalog filtering, a client-side cart, bundle pricing, and a server-side Stripe Checkout integration.
+Cloud Certification Store is the direct storefront for **Get It Done Certified** practice exam eBooks covering AWS, Microsoft Azure, Google Cloud, NVIDIA, Cisco, Snowflake, and Anthropic certifications. It includes a full catalog with cover images, provider filtering, a client-side cart, bundle pricing, and server-side Stripe Checkout.
 
 ## Sample deployment
 
