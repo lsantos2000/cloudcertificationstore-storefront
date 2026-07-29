@@ -2,6 +2,8 @@
 
 Cloud Certification Store is the direct storefront for **Get It Done Certified** practice exam eBooks covering AWS, Microsoft Azure, Google Cloud, NVIDIA, Cisco, Snowflake, and Anthropic certifications. It includes a full catalog with cover images, provider filtering, a client-side cart, bundle pricing, and server-side Stripe Checkout.
 
+This proof of concept (POC) was started with the help of ChatGPT Codex.
+
 ## Sample deployment
 
 A sample deployment can be found at [https://cloudbound-guides.lsantos2000.workers.dev/](https://cloudbound-guides.lsantos2000.workers.dev/).
